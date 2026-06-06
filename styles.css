@@ -1,0 +1,386 @@
+/* ========== RESET & BASE ========== */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --teal-deep: #1B4332;
+    --teal-mid: #2D6A4F;
+    --teal-accent: #40916C;
+    --teal-light: #52B788;
+    --ocean-blue: #1E6091;
+    --ocean-light: #168AAD;
+    --cream: #FEFAE0;
+    --cream-light: #fffef7;
+    --text-dark: #1a1a2e;
+    --text-body: #4a4a5a;
+    --text-light: #7a7a8a;
+    --white: #ffffff;
+    --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 6px 24px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.15);
+    --radius: 14px;
+    --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream-light);
+    color: var(--text-dark);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+/* ========== HERO SECTION ========== */
+.hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 4rem 3rem;
+    overflow: hidden;
+
+    /* Dramatic mountain/ocean gradient */
+    background: 
+        linear-gradient(
+            160deg,
+            rgba(27, 67, 50, 0.5) 0%,
+            rgba(30, 96, 145, 0.4) 30%,
+            rgba(22, 138, 173, 0.3) 60%,
+            rgba(45, 106, 79, 0.5) 100%
+        ),
+        linear-gradient(
+            to bottom,
+            #2c5f4a 0%,
+            #1a5276 25%,
+            #148f77 40%,
+            #1e8449 55%,
+            #4a7c6f 65%,
+            #6b8f71 72%,
+            #8fbc8f 78%,
+            #5f8575 85%,
+            #1B4332 100%
+        );
+    background-size: cover;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+        radial-gradient(ellipse at 70% 20%, rgba(22, 138, 173, 0.3) 0%, transparent 60%),
+        radial-gradient(ellipse at 30% 80%, rgba(27, 67, 50, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(64, 145, 108, 0.2) 0%, transparent 40%);
+    z-index: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.1) 0%,
+        rgba(0, 0, 0, 0.05) 40%,
+        rgba(0, 0, 0, 0.2) 100%
+    );
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 3;
+    max-width: 600px;
+    animation: heroFadeIn 1.2s ease-out;
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--cream);
+    line-height: 1.15;
+    margin-bottom: 1.2rem;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+.hero-description {
+    font-size: 1rem;
+    color: rgba(254, 250, 224, 0.85);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    max-width: 480px;
+    font-weight: 300;
+}
+
+.btn-about {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background: var(--teal-deep);
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: var(--transition);
+    border: 2px solid rgba(254, 250, 224, 0.2);
+    cursor: pointer;
+    letter-spacing: 0.5px;
+}
+
+.btn-about:hover {
+    background: var(--teal-mid);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(27, 67, 50, 0.4);
+    border-color: rgba(254, 250, 224, 0.4);
+}
+
+/* Hero floating particles */
+.hero-particles {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(254, 250, 224, 0.08);
+}
+
+.p1 { width: 200px; height: 200px; top: 10%; right: 10%; animation: floatUp 8s ease-in-out infinite; }
+.p2 { width: 120px; height: 120px; bottom: 20%; right: 25%; animation: floatUp 10s ease-in-out infinite reverse; }
+.p3 { width: 60px; height: 60px; top: 40%; right: 40%; animation: floatUp 6s ease-in-out infinite 2s; }
+.p4 { width: 40px; height: 40px; top: 60%; right: 5%; animation: floatUp 7s ease-in-out infinite 1s; }
+.p5 { width: 80px; height: 80px; top: 15%; right: 50%; animation: floatUp 9s ease-in-out infinite 3s; }
+
+/* ========== HERO DIVIDER ========== */
+.hero-divider {
+    height: 6px;
+    background: linear-gradient(90deg, var(--teal-deep), var(--ocean-blue), var(--teal-deep));
+}
+
+/* ========== OFFERINGS SECTION ========== */
+.offerings {
+    padding: 4rem 2rem 3rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.offerings-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--teal-deep);
+    text-align: center;
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+.offerings-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--teal-accent), var(--ocean-light));
+    margin: 0.6rem auto 0;
+    border-radius: 2px;
+}
+
+/* ========== OFFER CARDS ========== */
+.offer-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+.offer-card {
+    display: flex;
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.offer-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.offer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.offer-card.visible:hover {
+    transform: translateY(-5px);
+}
+
+.offer-image {
+    width: 220px;
+    min-height: 180px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Scenic background images */
+.img-mountains {
+    background: url('images/mountains.png') center/cover no-repeat;
+}
+
+.img-island {
+    background: url('images/island.png') center/cover no-repeat;
+}
+
+.img-tropical {
+    background: url('images/tropical.png') center/cover no-repeat;
+}
+
+.image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.1), rgba(0,0,0,0.3));
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 1rem;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.offer-card:hover .image-overlay {
+    opacity: 1;
+}
+
+.image-tag {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.offer-info {
+    padding: 1.5rem 1.8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.offer-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--teal-mid);
+    margin-bottom: 0.5rem;
+}
+
+.offer-desc {
+    font-size: 0.88rem;
+    color: var(--text-body);
+    line-height: 1.7;
+    font-weight: 400;
+}
+
+/* ========== FOOTER ========== */
+.footer {
+    background: linear-gradient(135deg, var(--teal-deep), #0b3d2c);
+    color: rgba(254, 250, 224, 0.7);
+    text-align: center;
+    padding: 1.8rem 2rem;
+    font-size: 0.9rem;
+}
+
+.footer .heart {
+    color: #e74c3c;
+    display: inline-block;
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes heroFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes floatUp {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-25px) rotate(3deg); }
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .hero {
+        padding: 3rem 2rem;
+        min-height: 80vh;
+    }
+
+    .hero-title {
+        font-size: 2.4rem;
+    }
+
+    .hero-description {
+        font-size: 0.9rem;
+    }
+
+    .offer-card {
+        flex-direction: column;
+    }
+
+    .offer-image {
+        width: 100%;
+        min-height: 200px;
+    }
+
+    .offerings-title {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    .offerings {
+        padding: 3rem 1rem 2rem;
+    }
+
+    .offer-info {
+        padding: 1.2rem;
+    }
+}
